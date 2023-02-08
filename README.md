@@ -1,19 +1,15 @@
 # RestSpringTest
 Приложение для ведения справочника
-<html>
-  <ul>
-    <li>jsp страница "Перевозчик"</li>
-    <li>обновление данных через ajax (используя REST)</li>
-    <li>валидации данных на сервере (CarrierValidator)</li>
-    <li>RestController для CRUD операций</li>
-    <li>AjaxCarrierController для работы с DTO</li>
-    <li>MyBatis настроен через Spring</li>
-    <li>БД MySQL (xampp, phpmyadmin)</li>
-    <li>добавлены две таблицы (связаны с основной через ключ fk)</li>
-    <li>в мапере "Перевозчик" настроена связь между таблицами</li>
-    <li>подключен bootstrap (через webjars)</li>
-  </ul> 
-</html>
+- jsp страница "Перевозчик"
+- обновление данных через ajax (используя REST)
+- валидации данных на сервере (CarrierValidator)
+- RestController для CRUD операций
+- AjaxCarrierController для работы с DTO
+- MyBatis настроен через Spring
+- БД MySQL (xampp, phpmyadmin)
+- добавлены две таблицы (связаны с основной через ключ fk)
+- в мапере "Перевозчик" настроена связь между таблицами<
+- подключен bootstrap (через webjars)
 Инициализация БД
 </br>`\resources\db_init\create_insert.sql`
 </br>

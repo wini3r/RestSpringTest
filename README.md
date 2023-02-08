@@ -10,12 +10,12 @@
   <li>БД MySQL (xampp, phpmyadmin)</li>
   <li>добавлены две таблицы (связаны с основной через ключ fk)</li>
   <li>в мапере "Перевозчик" настроена связь между таблицами</li>
-  <li>**подключен bootstrap (через webjars)</li>
+  <li>подключен bootstrap (через webjars)</li>
 </ul> 
-Инициализация БД:
+Инициализация БД
 </br>`\resources\db_init\create_insert.sql`
 </br>
-</br>Конфигурация БД:
+</br>Конфигурация БД
 </br>`\resources\database\jdbc.properties`
 </br>
 </br>Сервер: `apache-tomcat-9.0.71`

@@ -12,7 +12,7 @@
 - подключен bootstrap (через webjars)
 
 Инициализация БД
-`\resources\db_init\create_insert.sql`
+</br>`\resources\db_init\create_insert.sql`
 </br>
 </br>Конфигурация БД
 </br>`\resources\database\jdbc.properties`

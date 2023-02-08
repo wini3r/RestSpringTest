@@ -13,10 +13,13 @@
 </br>
 </br>*подключен bootstrap (через webjars)
 </br>
-</br>Инициализация БД
+</br>Инициализация БД:
 </br>\resources\db_init\create_insert.sql
 </br>
-</br>Конфигурация БД
+</br>Конфигурация БД:
 </br>\resources\database\jdbc.properties
+</br>
+</br>Сервер:
+</br>apache-tomcat-9.0.71
 
 

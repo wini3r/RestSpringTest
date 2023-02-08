@@ -13,7 +13,7 @@
 </br>
 </br>*подключен bootstrap (через webjars)
 </br>
-</br>Инициализация БД (название БД `carrier_directory` используется в CREATE TABLE)
+</br>Инициализация БД
 </br>\resources\db_init\create_insert.sql
 </br>
 </br>Конфигурация БД

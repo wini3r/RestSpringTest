@@ -23,5 +23,5 @@
 
 ![image](https://drive.google.com/uc?export=view&id=1dAxJwEe0fTQkwsdriu3YiJ3QKWbuNLNH)
 
-![image](https://drive.google.com/uc?export=1N6HUVGD0QoEE3EsuQn3K2zb7DYPAK1qoH)
+![image](https://drive.google.com/uc?export=view&id=1N6HUVGD0QoEE3EsuQn3K2zb7DYPAK1qoH)
 

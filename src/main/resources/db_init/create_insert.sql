@@ -1,6 +1,6 @@
 
 -- ----------------------------------------------------------------------COUNTRY
-CREATE TABLE `carrier_directory`.`COUNTRY`
+CREATE TABLE `COUNTRY`
 (
     `ID`         BIGINT NOT NULL AUTO_INCREMENT
   , `CODE`       INT NOT NULL
@@ -25,7 +25,7 @@ VALUES (804, 'УКРАИНА', 'UA')
 ; 
  
 -- -------------------------------------------------------------------TAX_SYSTEM
-CREATE TABLE `carrier_directory`.`TAX_SYSTEM`
+CREATE TABLE `TAX_SYSTEM`
 (
     `ID`         BIGINT         NOT NULL AUTO_INCREMENT
   , `NAME`       VARCHAR(90)    NOT NULL
@@ -49,7 +49,7 @@ VALUES ('НДС 20%', 20.00)
 ; 
  
 -- ----------------------------------------------------------------------CARRIER 
-CREATE TABLE `carrier_directory`.`CARRIER`
+CREATE TABLE `CARRIER`
 (
     `ID`          BIGINT        NOT NULL AUTO_INCREMENT
   , `NAME`        VARCHAR(90)   NOT NULL

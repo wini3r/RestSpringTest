@@ -1,0 +1,10 @@
+\.orig$
+\.orig\..*$
+\.chg\..*$
+\.rej$
+\.conflict\~$
+syntax: glob
+target/*
+.hg/*
+.hgignore
+.gitignore

@@ -1,5 +1,4 @@
 
-
 var carrierId = null;
 
 $(function () {
@@ -19,8 +18,8 @@ $(function () {
                     modal.find('#modal-carrier-name').val(data.name);
                     modal.find('#modal-carrier-inn').val(data.inn);
                     modal.find('#modal-carrier-regAddress').val(data.regAddress);
-                    modal.find('#modal-carrier-regCountry').val(data.regCountry);
-                    modal.find('#modal-carrier-taxSystem').val(data.taxSystem); 
+                    modal.find('#modal-carrier-country').val(data.country.id);
+                    modal.find('#modal-carrier-taxSystem').val(data.taxSystem.id);
                 },
                 error: errorHandler()
             });
@@ -31,8 +30,8 @@ $(function () {
             modal.find('#modal-carrier-id').val('');
             modal.find('#modal-carrier-name').val('');
             modal.find('#modal-carrier-inn').val('');
-            modal.find('#modal-carrier-regAddress').val(''); 
-            modal.find("#modal-carrier-regCountry")[0].selectedIndex = 0; 
+            modal.find('#modal-carrier-regAddress').val('');
+            modal.find("#modal-carrier-country")[0].selectedIndex = 0;
             modal.find("#modal-carrier-taxSystem")[0].selectedIndex = 0;
         }
     });
@@ -48,13 +47,13 @@ function showModalForUpdate(carrierId) {
     $('#carrierModal').modal('show');
 }
 
-function insertOrUpdateCarrier() {  
+function insertOrUpdateCarrier() {
     var dataFrom = $('#form-carrier').find('input, select')
-            .not('[value=""]') 
+            .not('[value=""]')
             .serialize();
     $.ajax({
         type: 'POST',
-        url: '/RestSpringTest/carriers',
+        url: '/RestSpringTest/ajax/carriers',
         data: dataFrom,
 //        data: $('#form-carrier').serialize(),
         success: function (data) {
@@ -64,7 +63,13 @@ function insertOrUpdateCarrier() {
         },
         error: errorHandler()
     });
-} 
+}
+
+function showConfirmDeleteCarrier(carrierId) {
+    notyConfirm("Удалить запись?", function () {
+        deleteCarrier(carrierId);
+    });
+}
 
 function deleteCarrier(carrierId) {
     $.ajax({
@@ -96,7 +101,7 @@ function updateAllTableRows() {
                 var carrier = data[i];
                 var row = carrierToTableRow(carrier);
                 tbody.append(row);
-            } 
+            }
         },
         error: errorHandler()
     });
@@ -104,18 +109,17 @@ function updateAllTableRows() {
 
 function carrierToTableRow(carrier) {
     return `
-        <tr id="table-row-${carrier.id}"> 
-            <!--<td>${carrier.id}</td>-->
+        <tr id="table-row-${carrier.id}">  
             <td>${formatNotNull(carrier.name)}</td>
             <td>${formatNotNull(carrier.inn)}</td>
             <td>${formatNotNull(carrier.regAddress)}</td>
-            <td>${formatNotNull(carrier.regCountry)}</td> 
-            <td>${formatTaxSystem(carrier.taxSystem)}</td>
+            <td>${formatNotNull(carrier.country.name)}</td> 
+            <td>${formatNotNull(carrier.taxSystem.name)}</td>
             <td> 
                 <a class="btn btn-primary btn-sm" role="button" onclick="showModalForUpdate(${carrier.id})"> 
                     Изменить
                 </a>  
-                <a class="btn btn-danger btn-sm" role="button" onclick="deleteCarrier(${carrier.id})"> 
+                <a class="btn btn-danger btn-sm" role="button" onclick="showConfirmDeleteCarrier(${carrier.id})"> 
                     Удалить
                 </a>
             </td>
@@ -129,15 +133,15 @@ function formatNotNull(value) {
     return value === null ? '' : value;
 }
 
-function formatTaxSystem(value) {
-    if (value === '' || value === null) {
-        return 'Без НДС';
-    } else if (value >= 0) {
-        return 'НДС ' + value + '%';
-    } else {
-        return '';
-    }
-}
+//function formatTaxSystem(value) {
+//    if (value === '' || value === null) {
+//        return 'Без НДС';
+//    } else if (value >= 0) {
+//        return 'НДС ' + value + '%';
+//    } else {
+//        return '';
+//    }
+//}
 
 // ########################## NOTIFY ##########################
 
@@ -147,27 +151,39 @@ function errorHandler() {
     };
 }
 
+function notyConfirm(msg, onConfirm) {
+    var n = new Noty({
+        text: msg,
+        layout: 'center', 
+        modal: true,
+        buttons: [
+            Noty.button('Да', 'btn btn-success', function () {
+                onConfirm();
+                n.close();
+            }, {id: 'button1', 'data-status': 'ok'}),
+
+            Noty.button('Нет', 'btn btn-error', function () {
+                n.close();
+            })
+        ]
+    });
+    n.show();
+}
+
 function notyError(text) {
-    showNoty('error', 10, text);
+    showNoty('error', 5, text);
 }
 
 function notySucces(text) {
     showNoty('success', 3, text);
 }
-
-/**
- * // https://ned.im/noty/v2/options.html
- * 
- * @param {type} success, error, warning, information, notification
- * @param {type} text
- * @returns {undefined}
- */
+ 
 function showNoty(type, timeoutSeconds, text) {
-    noty({
-        layout: 'top', // topRight
-        type: type, // success, error, warning, information, notification
-        timeout: timeoutSeconds * 1000, // [integer|boolean] delay for closing event in milliseconds. Set false for sticky notifications
-        progressBar: true, // [boolean] - displays a progress bar
-        text: text
-    });
+    Noty.closeAll();
+    new Noty({
+        layout: 'topCenter',
+        type: type,
+        text: text,
+        timeout: timeoutSeconds * 1000
+    }).show(); 
 }

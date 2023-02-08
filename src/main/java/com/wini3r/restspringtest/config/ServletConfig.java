@@ -1,10 +1,6 @@
 package com.wini3r.restspringtest.config;
 
-import java.io.IOException;
-import java.io.InputStream;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.wini3r.restspringtest.validator.CarrierValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -38,16 +34,6 @@ public class ServletConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public SqlSessionFactory getSqlSessionFactory() {
-        String resource = "mybatis/mybatis-config.xml";
-        try (InputStream inputStream = Resources.getResourceAsStream(resource);) {
-            return new SqlSessionFactoryBuilder().build(inputStream);
-        } catch (IOException ex) {
-            throw new RuntimeException("Ошибка чтения конфига mybatis: " + resource, ex);
-        }
-    }
-
-    @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
         bean.setViewClass(JstlView.class);
@@ -55,4 +41,10 @@ public class ServletConfig implements WebMvcConfigurer {
         bean.setSuffix(".jsp");
         return bean;
     }
+ 
+    @Bean
+    public CarrierValidator carrierValidator() {
+        return new CarrierValidator();
+    }
+
 }

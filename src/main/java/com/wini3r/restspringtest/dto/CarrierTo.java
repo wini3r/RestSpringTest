@@ -1,32 +1,21 @@
-package com.wini3r.restspringtest.model;
+package com.wini3r.restspringtest.dto;
 
+import com.wini3r.restspringtest.model.Carrier;
+import com.wini3r.restspringtest.model.Country;
+import com.wini3r.restspringtest.model.TaxSystem;
 import java.util.Objects;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-public class Carrier {
+public class CarrierTo {
 
     private Long id;
-
-    @NotNull(message = "Название не должно быть пустым")
-    @Size(min = 1, max = 90, message = "Название должно содержать от 1 до 90 символов")
     private String name;
-
     private String inn;
     private String regAddress;
-    private Country country;
-    private TaxSystem taxSystem;
+    private Long country;
+    private Long taxSystem;
 
-    public Carrier() {
-    }
-
-    public Carrier(Long id, String name, String inn, String regAddress, Country country, TaxSystem taxSystem) {
-        this.id = id;
-        this.name = name;
-        this.inn = inn;
-        this.regAddress = regAddress;
-        this.country = country;
-        this.taxSystem = taxSystem;
+    public Carrier getAsCarrier() {
+        return new Carrier(id, name, inn, regAddress, new Country(country), new TaxSystem(taxSystem));
     }
 
     public Long getId() {
@@ -61,31 +50,31 @@ public class Carrier {
         this.regAddress = regAddress;
     }
 
-    public Country getCountry() {
+    public Long getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(Long country) {
         this.country = country;
     }
 
-    public TaxSystem getTaxSystem() {
+    public Long getTaxSystem() {
         return taxSystem;
     }
 
-    public void setTaxSystem(TaxSystem taxSystem) {
+    public void setTaxSystem(Long taxSystem) {
         this.taxSystem = taxSystem;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        hash = 13 * hash + Objects.hashCode(this.name);
-        hash = 13 * hash + Objects.hashCode(this.inn);
-        hash = 13 * hash + Objects.hashCode(this.regAddress);
-        hash = 13 * hash + Objects.hashCode(this.country);
-        hash = 13 * hash + Objects.hashCode(this.taxSystem);
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.inn);
+        hash = 89 * hash + Objects.hashCode(this.regAddress);
+        hash = 89 * hash + Objects.hashCode(this.country);
+        hash = 89 * hash + Objects.hashCode(this.taxSystem);
         return hash;
     }
 
@@ -100,7 +89,7 @@ public class Carrier {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Carrier other = (Carrier) obj;
+        final CarrierTo other = (CarrierTo) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -110,10 +99,10 @@ public class Carrier {
         if (!Objects.equals(this.regAddress, other.regAddress)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.country, other.country)) {
             return false;
         }
-        if (!Objects.equals(this.country, other.country)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.taxSystem, other.taxSystem)) {
@@ -124,7 +113,7 @@ public class Carrier {
 
     @Override
     public String toString() {
-        return "Carrier{" + "id=" + id + ", name=" + name + ", inn=" + inn + ", regAddress=" + regAddress + ", country=" + country + ", taxSystem=" + taxSystem + '}';
+        return "CarrierTo{" + "id=" + id + ", name=" + name + ", inn=" + inn + ", regAddress=" + regAddress + ", country=" + country + ", taxSystem=" + taxSystem + '}';
     }
 
 }

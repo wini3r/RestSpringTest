@@ -11,8 +11,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Справочники</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown">
-                    <a class="dropdown-item" href="#">Налог</a>
-                    <a class="dropdown-item" href="#">Страны</a> 
+                    <a class="dropdown-item" href="taxSystems">Налог</a>
+                    <a class="dropdown-item" href="countries">Страны</a> 
                 </div>
             </li>
         </ul>

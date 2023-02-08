@@ -4,9 +4,7 @@
 <html>
     <head>
         <jsp:include page="fragment/head.jsp" />
-        <title>Перевозки</title>  
-        <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
-
+        <title>Перевозки</title>   
         <script type="text/javascript" src="resources/js/carrier.js"></script> 
         <script type="text/javascript">
         </script>
@@ -18,10 +16,9 @@
                 <h4 class="mb-3">Перевозчики</h4>
                 <button type="button" class="btn btn-primary mb-2" onclick="showModalForInsert()">Добавить</button>
                 <!--Data-->
-                <table id="table-carriers" class="table table-hover" cellpadding="7">
+                <table id="table-carriers" class="table table-hover">
                     <thead>
-                        <tr> 
-                            <!--<th>ID</th>-->
+                        <tr>  
                             <th>Название</th>
                             <th>ИНН</th>
                             <th>Адрес регистрации</th>
@@ -33,18 +30,17 @@
                     <tbody id="tbody-carriers">
                         <!--Оставил в качестве примера использования JSP. Таблица обновляется через ajax-->
                         <c:forEach items="${carriers}" var="carrier"> 
-                            <tr id="table-row-${carrier.id}">
-                                <!--<td>${carrier.id}</td>-->
+                            <tr id="table-row-${carrier.id}"> 
                                 <td>${carrier.name}</td>
                                 <td>${carrier.inn}</td>
                                 <td>${carrier.regAddress}</td>
-                                <td>${carrier.regCountry}</td> 
-                                <td>${carrier.taxSystem}</td>
+                                <td>${carrier.country.name}</td> 
+                                <td>${carrier.taxSystem.name}</td>
                                 <td> 
                                     <a class="btn btn-primary btn-sm" role="button" onclick="showModalForUpdate(${carrier.id})"> 
                                         Изменить
                                     </a>  
-                                    <a class="btn btn-danger btn-sm" role="button" onclick="deleteCarrier(${carrier.id})"> 
+                                    <a class="btn btn-danger btn-sm" role="button" onclick="showConfirmDeleteCarrier(${carrier.id})"> 
                                         Удалить
                                     </a>
                                 </td>
@@ -54,9 +50,8 @@
                 </table> 
             </div>
         </div>
-        <jsp:include page="fragment/footer.jsp" />        
+        <jsp:include page="fragment/footer.jsp" />         
 
-        <!--<script src="form-validation.js"></script>--> 
         <!--Modal-->
         <div class="modal fade" id="carrierModal" tabindex="-1" data-backdrop="static"
              aria-labelledby="carrierModalLabel" aria-hidden="true">
@@ -84,29 +79,21 @@
                                 <input type="text" class="form-control" id="modal-carrier-regAddress" class="form-control" name="regAddress">
                             </div> 
                             <div class="form-group">
-                                <label for="modal-carrier-regCountry" class="col-form-label">Страна регистрации</label>
-                                <!--<input type="text" class="form-control" id="modal-carrier-regCountry" class="form-control" name="regCountry">-->
-                                <select class="form-control custom-select" id="modal-carrier-regCountry" name="regCountry"> 
+                                <label for="modal-carrier-country" class="col-form-label">Страна регистрации</label>
+                                <select class="form-control custom-select" id="modal-carrier-country" name="country"> 
                                     <option value="null" disabled="true">...</option>
-                                    <option>Россия</option>
-                                    <option>Казахстан</option>
-                                    <option>Азербайджан</option>
-                                    <option>Армения</option>
-                                    <option>Белоруссия</option>
-                                    <option>Киргизия</option>
-                                    <option>Молдавия</option>
-                                    <option>Таджикистан</option>
-                                    <option>Узбекистан</option> 
+                                    <c:forEach items="${countries}" var="country"> 
+                                        <option value="${country.id}" label="${country.name}"/>
+                                    </c:forEach>  
                                 </select> 
                             </div> 
                             <div class="form-group">
-                                <label for="modal-carrier-taxSystem" class="col-form-label">Система налогообложения</label>
+                                <label for="modal-carrier-taxSystem" class="col-form-label">Система налогообложения</label> 
                                 <select class="form-control custom-select" id="modal-carrier-taxSystem" name="taxSystem">
                                     <option value="null" disabled="true">...</option>
-                                    <option value="" >Без НДС</option>
-                                    <option value="0">НДС 0%</option>
-                                    <option value="10">НДС 10%</option>
-                                    <option value="20">НДС 20%</option> 
+                                    <c:forEach items="${taxSystems}" var="taxSystem"> 
+                                        <option value="${taxSystem.id}" label="${taxSystem.name}"/>
+                                    </c:forEach>
                                 </select> 
                             </div>  
                         </form>

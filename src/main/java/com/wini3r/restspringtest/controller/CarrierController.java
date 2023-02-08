@@ -2,6 +2,8 @@ package com.wini3r.restspringtest.controller;
 
 import com.wini3r.restspringtest.dao.CarrierDao;
 import com.wini3r.restspringtest.model.Carrier;
+import com.wini3r.restspringtest.util.BindingResultUtil;
+import com.wini3r.restspringtest.validator.CarrierValidator;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarrierController {
 
     private final CarrierDao carrierDao;
+    private final CarrierValidator carrierValidator;
 
     @Autowired
-    public CarrierController(CarrierDao carrierDao) {
+    public CarrierController(CarrierDao carrierDao, CarrierValidator carrierValidator) {
         this.carrierDao = carrierDao;
+        this.carrierValidator = carrierValidator;
     }
 
     @GetMapping
@@ -41,21 +45,17 @@ public class CarrierController {
 
     @PostMapping
     public ResponseEntity<String> insertOrUpdate(@Valid Carrier carrier, BindingResult result) {
+        carrierValidator.validate(carrier, result);
         // валидацию с "javax.validation.constraints" не удалось натсроить 
         if (result.hasErrors()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                    .body(getErrors(result));
+                    .body(BindingResultUtil.getHtmlErrors(result));
         } else {
-            try {
-                if (carrier.getId() == null) {
-                    carrierDao.insert(carrier);
-                } else {
-                    carrierDao.update(carrier);
-                }
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                        .body(e.toString().replaceAll("\\n", "</br>"));
-            }
+            if (carrier.getId() == null) {
+                carrierDao.insert(carrier);
+            } else {
+                carrierDao.update(carrier);
+            } 
             return ResponseEntity.ok().build();
         }
     }
@@ -74,16 +74,6 @@ public class CarrierController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
         carrierDao.delete(id);
-    }
-
-    private String getErrors(BindingResult result) {
-        StringBuilder sb = new StringBuilder();
-        result.getFieldErrors().forEach(r -> sb.append(r.getField())
-                .append(": ")
-                .append(r.getDefaultMessage())
-                .append("</br>")
-        );
-        return sb.toString();
-    }
+    } 
 
 }

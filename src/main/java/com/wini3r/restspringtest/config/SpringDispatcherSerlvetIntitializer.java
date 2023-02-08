@@ -6,7 +6,7 @@ public class SpringDispatcherSerlvetIntitializer extends AbstractAnnotationConfi
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class};
+        return new Class[]{AppConfig.class, MyBatisConfig.class};
     }
 
     @Override

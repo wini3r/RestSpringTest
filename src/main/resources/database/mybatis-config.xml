@@ -17,5 +17,7 @@
     </environments>
     <mappers>
         <mapper class="com.wini3r.restspringtest.mapper.CarrierMapper"/>
+        <mapper class="com.wini3r.restspringtest.mapper.CountryMapper"/>
+        <mapper class="com.wini3r.restspringtest.mapper.TaxSystemMapper"/>
     </mappers>
 </configuration>

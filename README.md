@@ -12,3 +12,9 @@
 </br>--в мапере "Перевозчик" настроена связь между таблицами
 </br>
 </br>*подключен bootstrap (через webjars)
+</br>
+</br>Инициализация БД
+</br>\resources\db_init\create_insert.sql
+</br>
+</br>Конфигурация БД
+</br>\resources\database\jdbc.properties

@@ -21,5 +21,7 @@
 </br>
 </br>Сервер:
 </br>apache-tomcat-9.0.71
+</br>JDK:
+</br>jdk1.8.0_231
 
 

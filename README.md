@@ -10,8 +10,7 @@
 </br>--БД MySQL (xampp, phpmyadmin)
 </br>--добавлены две таблицы (связаны с основной через ключ fk)
 </br>--в мапере "Перевозчик" настроена связь между таблицами
-</br>
-</br>*подключен bootstrap (через webjars)
+</br>**подключен bootstrap (через webjars)
 </br>
 </br>Инициализация БД:
 </br>`\resources\db_init\create_insert.sql`
